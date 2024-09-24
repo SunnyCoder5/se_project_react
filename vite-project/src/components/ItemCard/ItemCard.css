@@ -1,0 +1,30 @@
+.card {
+  width: 323px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.card__name {
+  position: absolute;
+  top: 15px;
+  color: #00000099;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border-color: #0000004d;
+  padding: 2px 12px;
+}
+
+.card__image {
+  width: 100%;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+@media screen and (max-width: 420px) {
+  .card {
+    width: 343px;
+  }
+}
