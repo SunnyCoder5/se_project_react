@@ -1,0 +1,13 @@
+.user-clothes {
+  display: flex;
+  flex-direction: row;
+  margin-left: 116px;
+}
+
+.user-clothes__add-clothes-button {
+  border: none;
+  padding: 0;
+  margin-left: 20px;
+  color: #00000099;
+  background-color: #f3f3f3;
+}
