@@ -1,7 +1,11 @@
 .user-clothes {
+  width: 1015px;
+  margin: 0;
+}
+
+.user-clothes__section {
   display: flex;
   flex-direction: row;
-  margin-left: 116px;
 }
 
 .user-clothes__add-clothes-button {
@@ -10,4 +14,12 @@
   margin-left: 20px;
   color: #00000099;
   background-color: #f3f3f3;
+}
+
+.user-clothes__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 323px);
+  list-style-type: none;
+  grid-gap: 20px;
+  padding: 0;
 }

@@ -14,8 +14,10 @@
   width: 16px;
   height: 16px;
   position: absolute;
+  border-radius: 16px;
   top: 20px;
   right: 28px;
+  padding: 0;
 }
 
 .modal__image {
@@ -23,24 +25,43 @@
   height: 498px;
   margin: 0;
   padding: 0;
-  border-radius: 16px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
 
 .modal__footer {
   background-color: #ffffff;
+  width: 498px;
   padding: 0;
   margin: 0;
-  position: relative;
+  border-radius: 16px;
+  display: flex;
 }
 
 .modal__caption {
-  margin-left: 32px;
-  margin-top: 20px;
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__card-name {
+  margin: 20px 280px 16px 32px;
+  font-size: 20px;
 }
 
 .modal__weather {
   margin-left: 32px;
+  width: 115px;
+  margin-top: 0;
+}
+
+.modal__card-delete-button {
+  color: #ff4d00;
+  margin-top: 20px;
+  height: 24px;
+  font-size: 20px;
+  padding: 0;
+  border: none;
+  background-color: #ffffff;
 }
 
 @media screen and (max-width: 420px) {

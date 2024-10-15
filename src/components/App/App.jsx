@@ -12,6 +12,14 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import Api from "../../utils/api";
+
+const api = new Api({
+  baseUrl: "http://localhost:3001",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -53,25 +61,40 @@ function App() {
       .catch(console.error);
   }, []);
 
-  const onAddItem = (values) => {
-    console.log(values);
-  };
-
   const [clothingItems, setClothingItems] = useState([]);
 
-  const handleAddItemSubmit = (values) => {
-    const newItem = {
-      name: values.name,
-      link: values.imageUrl,
-      weather: values.weather,
-    };
-    renderNewClothingItem(newItem)
+  const handleAddItemSubmit = (item) => {
+    api
+      .addItem(item)
       .then((res) => {
-        setClothingItems([item, ...clothingItems]);
+        setClothingItems([res, ...clothingItems]);
         closeModal();
       })
       .catch(console.error);
   };
+
+  const deleteItemSubmit = () => {
+    api
+      .deleteItem(selectedCard._id)
+      .then(() => {
+        const newClothingItems = clothingItems.filter((item) => {
+          return item._id !== selectedCard._id;
+        });
+        setClothingItems(newClothingItems);
+        closeModal();
+      })
+      .catch(console.error);
+  };
+
+  useEffect(() => {
+    api
+      .getCards()
+      .then((res) => {
+        setClothingItems(res);
+        console.log(res);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <div className="page">
@@ -95,6 +118,8 @@ function App() {
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     isMobileMenuOpened={isMobileMenuOpened}
+                    clothingItems={clothingItems}
+                    onAddItem={handleAddItemSubmit}
                   />
                 )
               }
@@ -104,7 +129,9 @@ function App() {
               element={
                 <Profile
                   addButtonClick={addButtonClick}
-                  handleAddItemSubmit={handleAddItemSubmit}
+                  onAddItem={handleAddItemSubmit}
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
                 />
               }
             />
@@ -114,12 +141,13 @@ function App() {
         <AddItemModal
           closeModal={closeModal}
           isOpen={activeModal === "add-garment"}
-          onAddItem={onAddItem}
+          onAddItem={handleAddItemSubmit}
         />
         <ItemModal
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeModal}
+          onDelete={deleteItemSubmit}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>
