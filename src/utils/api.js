@@ -1,40 +1,45 @@
-class Api {
-  constructor({ baseUrl, headers }) {
-    this.baseUrl = baseUrl;
-    this._headers = headers;
-  }
+export const baseUrl = "http://localhost:3001";
 
-  _checkResponse(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error ${res.status}`);
+export const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
   }
+  return Promise.reject(`Error ${res.status}`);
+};
 
-  getCards() {
-    return fetch(this.baseUrl + "/items", {
-      method: "GET",
-    }).then(this._checkResponse);
-  }
+const getCards = async () => {
+  const res = await fetch(baseUrl + "/items", {
+    method: "GET",
+  });
+  return checkResponse(res);
+};
 
-  addItem({ name, imageUrl, weather }) {
-    return fetch(this.baseUrl + "/items", {
-      method: "POST",
-      headers: this._headers,
-      body: JSON.stringify({
-        name,
-        imageUrl,
-        weather,
-      }),
-    }).then(this._checkResponse);
-  }
+const addItem = ({ name, imageUrl, weather }) => {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${baseUrl}/items`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name,
+      imageUrl,
+      weather,
+    }),
+  }).then(checkResponse);
+};
 
-  deleteItem(id) {
-    return fetch(this.baseUrl + "/items/" + id, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
-}
+const deleteItem = (id) => {
+  return fetch(`${baseUrl}/items`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
 
-export default Api;
+export { getCards, addItem, deleteItem };

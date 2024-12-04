@@ -64,6 +64,10 @@
   background-color: #ffffff;
 }
 
+.modal__card-delete-button_hidden {
+  display: none;
+}
+
 @media screen and (max-width: 420px) {
   .modal__content_type_image {
     width: 343px;

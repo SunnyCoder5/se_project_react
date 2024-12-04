@@ -9,6 +9,7 @@ function Main({
   handleCardClick,
   isMobileMenuOpened,
   clothingItems,
+  isLoggedIn,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   return (
@@ -30,6 +31,9 @@ function Main({
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                  isLiked={isLiked}
+                  isLoggedIn={isLoggedIn}
                 />
               );
             })}{" "}

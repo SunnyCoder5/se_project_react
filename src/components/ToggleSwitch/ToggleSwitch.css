@@ -6,6 +6,7 @@
 .switch__box {
   width: 56px;
   height: 28px;
+  margin-top: 8px;
   appearance: none;
   border: 2px solid #7e7e7e;
   border-radius: 20px;
@@ -20,6 +21,7 @@
   text-align: center;
   cursor: pointer;
   position: absolute;
+  top: 9px;
 }
 
 .switch__slider-F {
@@ -35,13 +37,13 @@
 .switch__temp-F {
   position: absolute;
   left: 4px;
-  top: -15px;
+  top: -9px;
 }
 
 .switch__temp-C {
   position: absolute;
   right: 4px;
-  top: -15px;
+  top: -9px;
 }
 
 .switch__active {

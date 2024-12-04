@@ -13,6 +13,31 @@
   margin: 0;
 }
 
+.header__login {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-left: none;
+  margin-right: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.header__signup {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0 24px 0 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .header__menu {
   margin: 0 24px auto auto;
   display: flex;
@@ -48,6 +73,12 @@
   text-decoration: none;
   font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   color: black;
+}
+
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 @media screen and (max-width: 420px) {
