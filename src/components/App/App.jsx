@@ -12,10 +12,23 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { getCards, addItem, deleteItem, baseUrl } from "../../utils/api.js";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  baseUrl,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api.js";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
-import { signUp, logIn, getUserProfile } from "../../utils/auth.js";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
+import {
+  signUp,
+  logIn,
+  getUserProfile,
+  handleProfileEdit,
+} from "../../utils/auth.js";
 import * as auth from "../../utils/auth.js";
 
 function App() {
@@ -91,6 +104,10 @@ function App() {
     setActiveModal("login");
   };
 
+  const handleProfileEditClick = () => {
+    setActiveModal("edit-profile");
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -112,8 +129,31 @@ function App() {
       .catch(console.error);
   };
 
+  const handleCardLike = ({ _id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    if (!isLiked) {
+      addCardLike(_id, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === _id ? updatedCard : item))
+          );
+          console.log("Item liked", updatedCard);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      removeCardLike(_id, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === _id ? updatedCard : item))
+          );
+        })
+        .catch(console.error);
+    }
+  };
+
   const deleteItemSubmit = () => {
-    deleteItem(selectedCard._id)
+    const token = localStorage.getItem("jwt");
+    deleteItem(selectedCard, token)
       .then(() => {
         const newClothingItems = clothingItems.filter((item) => {
           return item._id !== selectedCard._id;
@@ -124,11 +164,28 @@ function App() {
       .catch(console.error);
   };
 
-  useEffect(() => {
-    getCards()
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    navigate("/");
+    setIsLoggedIn(false);
+  };
+
+  const onEditProfileSubmit = ({ name, avatar }) => {
+    const token = localStorage.getItem("jwt");
+    handleProfileEdit({ name, avatar }, token)
       .then((res) => {
-        setClothingItems(res);
-        console.log(res);
+        setCurrentUser({ ...currentUser, ...res });
+        closeModal();
+      })
+      .catch((error) => {
+        console.error("Error updating profile:", error);
+      });
+  };
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
       })
       .catch(console.error);
   }, []);
@@ -177,6 +234,7 @@ function App() {
                       clothingItems={clothingItems}
                       onAddItem={handleAddItemSubmit}
                       isLoggedIn={isLoggedIn}
+                      onCardLike={handleCardLike}
                     />
                   )
                 }
@@ -190,6 +248,9 @@ function App() {
                       onAddItem={handleAddItemSubmit}
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
+                      handleProfileEditClick={handleProfileEditClick}
+                      onCardLike={handleCardLike}
+                      handleLogout={handleLogout}
                     />
                   </ProtectedRoute>
                 }
@@ -220,6 +281,11 @@ function App() {
           closeModal={closeModal}
           onLogIn={onLogIn}
           openRegisterModal={handleRegisterModal}
+        />
+        <EditProfileModal
+          isOpen={activeModal === "edit-profile"}
+          closeModal={closeModal}
+          onEditProfileSubmit={onEditProfileSubmit}
         />
       </div>
     </CurrentUserContext.Provider>

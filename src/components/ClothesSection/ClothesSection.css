@@ -6,6 +6,9 @@
 .user-clothes__section {
   display: flex;
   flex-direction: row;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
 }
 
 .user-clothes__add-clothes-button {

@@ -1,12 +1,37 @@
 .side-bar {
   display: flex;
-  flex-direction: row;
-  width: 100%;
+  flex-direction: column;
+  width: 229px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
 }
 
-.side-bar__avatar {
+.side-bar__user {
+  display: flex;
+  flex-direction: row;
+}
+
+.side-bar__user-avatar {
   margin-right: 16px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+.sidebar__button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.sidebar__button {
+  margin: 0;
+  border: none;
+  text-align: start;
+  padding: 0;
+  cursor: pointer;
+  color: black;
+  background-color: transparent;
 }

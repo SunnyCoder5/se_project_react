@@ -10,11 +10,14 @@ function Main({
   isMobileMenuOpened,
   clothingItems,
   isLoggedIn,
+  isLiked,
+  onCardLike,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+
   return (
     <main>
-      {!isMobileMenuOpened && <WeatherCard weatherData={weatherData} />}
+      <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
           Today is {weatherData.temp[currentTemperatureUnit]} / You may want to
@@ -34,6 +37,7 @@ function Main({
                   clothingItems={clothingItems}
                   isLiked={isLiked}
                   isLoggedIn={isLoggedIn}
+                  onCardLike={onCardLike}
                 />
               );
             })}{" "}

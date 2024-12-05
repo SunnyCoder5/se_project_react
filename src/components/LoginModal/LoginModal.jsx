@@ -63,7 +63,9 @@ const LoginModal = ({
         />
       </label>
       <div className="modal__buttons-wrapper">
-        <button type="modal__form-button">Log In</button>
+        <button type="submit" className="modal__form-button">
+          Log In
+        </button>
         <button
           type="button"
           className="modal__or-signup-button"

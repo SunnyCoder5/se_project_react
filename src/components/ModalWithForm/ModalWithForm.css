@@ -54,7 +54,8 @@
   margin-top: 28px;
   margin-bottom: 0;
   padding-left: 28px;
-  width: 118px;
+  max-width: 140px;
+  width: 100%;
 }
 
 .modal__close {
@@ -152,21 +153,6 @@ input::-ms-input-placeholder {
   border-radius: 4px;
 }
 
-.modal__form-button_active {
-  background-color: black;
-  color: #fff;
-  cursor: pointer;
-}
-
-.modal__form-button_filled {
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
-.modal__form-button_disabled {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
 .modal__or-signup-button {
   border: none;
   background: transparent;
@@ -181,6 +167,11 @@ input::-ms-input-placeholder {
   color: #00000080;
   cursor: pointer;
   margin-left: 5px;
+}
+
+.modal__form-button_save-changes {
+  width: 128px;
+  background-color: #000000;
 }
 
 .modal__radio-input {

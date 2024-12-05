@@ -12,7 +12,9 @@ function ModalWithForm({
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div
         className={`"modal__content" ${
-          title === "Log In" ? "modal__content_type_login" : "modal__content"
+          title === "Log In" || title === "Change Profile Data"
+            ? "modal__content_type_login"
+            : "modal__content"
         }`}
       >
         <p className="modal__title">{title}</p>

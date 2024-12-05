@@ -7,11 +7,8 @@ export const checkResponse = (res) => {
   return Promise.reject(`Error ${res.status}`);
 };
 
-const getCards = async () => {
-  const res = await fetch(baseUrl + "/items", {
-    method: "GET",
-  });
-  return checkResponse(res);
+const getItems = () => {
+  return fetch(`${baseUrl}/items`).then((res) => checkResponse(res));
 };
 
 const addItem = ({ name, imageUrl, weather }) => {
@@ -31,8 +28,8 @@ const addItem = ({ name, imageUrl, weather }) => {
   }).then(checkResponse);
 };
 
-const deleteItem = (id) => {
-  return fetch(`${baseUrl}/items`, {
+const deleteItem = (item, token) => {
+  return fetch(`${baseUrl}/items/${item._id}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
@@ -42,4 +39,24 @@ const deleteItem = (id) => {
   }).then(checkResponse);
 };
 
-export { getCards, addItem, deleteItem };
+const addCardLike = (_id, token) => {
+  return fetch(`${baseUrl}/items/${_id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
+
+const removeCardLike = (_id, token) => {
+  return fetch(`${baseUrl}/items/${_id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
+
+export { getItems, addItem, deleteItem, addCardLike, removeCardLike };
