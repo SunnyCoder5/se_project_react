@@ -16,11 +16,14 @@ const AddItemModal = ({ closeModal, onAddItem, isOpen }) => {
     setWeather(e.target.value);
   };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    onAddItem({ name, imageUrl, weather });
+  function reset() {
     setName("");
     setImageUrl("");
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onAddItem({ name, imageUrl, weather }, reset);
   }
 
   return (
@@ -36,7 +39,7 @@ const AddItemModal = ({ closeModal, onAddItem, isOpen }) => {
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="garnmentName"
           placeholder="Name"
           value={name}
           onChange={handleNameChange}

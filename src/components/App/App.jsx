@@ -119,12 +119,13 @@ function App() {
 
   const [clothingItems, setClothingItems] = useState([]);
 
-  const handleAddItemSubmit = (item) => {
+  const handleAddItemSubmit = (item, reset) => {
     const token = localStorage.getItem("jwt");
     addItem(item, token)
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
         closeModal();
+        reset();
       })
       .catch(console.error);
   };
