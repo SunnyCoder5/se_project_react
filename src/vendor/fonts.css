@@ -1,7 +1,7 @@
 @font-face {
   font-family: "CabinetGrotesk-Medium";
   src: url("../vendor/fonts/CabinetGrotesk-Medium.woff2") format("woff2"),
-    url("../vendor/fonts/CabinetGrotesk-Medium.woff") format("woff"),
+    url("../vendor/fonts/CabinetGrotesk-Medium.woff2") format("woff"),
     url("../vendor/fonts/CabinetGrotesk-Medium.ttf") format("truetype");
   font-weight: 500;
   font-display: swap;

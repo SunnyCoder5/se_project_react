@@ -1,5 +1,9 @@
-import { baseUrl } from "./api";
 import { checkResponse } from "./api";
+
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.maryvlad.jumpingcrab.com"
+    : "http://localhost:3001";
 
 export const checkToken = (token) => {
   return fetch(`${baseUrl}/users/me`, {

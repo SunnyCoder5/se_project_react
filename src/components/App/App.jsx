@@ -16,7 +16,6 @@ import {
   getItems,
   addItem,
   deleteItem,
-  baseUrl,
   addCardLike,
   removeCardLike,
 } from "../../utils/api.js";
@@ -46,6 +45,8 @@ function App() {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
+
+  
 
   const onSignUp = ({ email, password, name, avatar }) => {
     const userProfile = { email, password, name, avatar };

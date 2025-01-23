@@ -1,4 +1,9 @@
-export const baseUrl = "http://localhost:3001";
+//export const baseUrl = "http://localhost:3001";
+
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.maryvlad.jumpingcrab.com"
+    : "http://localhost:3001";
 
 function request(url, options) {
   return fetch(url, options).then(checkResponse);
@@ -14,7 +19,6 @@ export const checkResponse = (res) => {
 const getItems = () => {
   return request(`${baseUrl}/items`);
 };
-
 const addItem = ({ name, imageUrl, weather }) => {
   const token = localStorage.getItem("jwt");
   return request(`${baseUrl}/items`, {
